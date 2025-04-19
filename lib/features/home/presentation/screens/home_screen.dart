@@ -61,22 +61,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 : ListView.builder(
                                   itemCount: postList.length,
                                   itemBuilder:
-                                      (context, index) => InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) =>
-                                                      ProductDetailsScreen(
-                                                        post: postList[index],
-                                                      ),
-                                            ),
-                                          );
-                                        },
-                                        child: PostCardWidget(
-                                          post: postList[index],
-                                        ),
-                                      ),
+                                      (context, index) =>
+                                          PostCardWidget(post: postList[index]),
                                 ),
                       ),
                     ],

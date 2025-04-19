@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:levelx_task/features/home/domain/entities/post_entities.dart';
+import 'package:levelx_task/features/product_details/presentation/screens/product_details_screen.dart';
 
 class PostCardWidget extends StatelessWidget {
   const PostCardWidget({super.key, required this.post});
@@ -11,23 +12,33 @@ class PostCardWidget extends StatelessWidget {
       spacing: 10,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          spacing: 10,
-          children: [
-            CircleAvatar(
-              radius: 16,
-              backgroundImage: NetworkImage(
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGJzz91QEnKkFVvf_TUr-EgOcykUxfXIkh3g&s',
+        InkWell(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProductDetailsScreen(post: post),
               ),
-            ),
-            Expanded(
-              child: Text(
-                post.title,
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            );
+          },
+          child: Row(
+            spacing: 10,
+            children: [
+              CircleAvatar(
+                radius: 16,
+                backgroundImage: NetworkImage(
+                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGJzz91QEnKkFVvf_TUr-EgOcykUxfXIkh3g&s',
+                ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Text(
+                  post.title,
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ],
+          ),
         ),
+        SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
@@ -48,7 +59,7 @@ class PostCardWidget extends StatelessWidget {
             Icon(Icons.share, size: 18, color: Colors.grey),
           ],
         ),
-        const Divider(height: 30),
+        const Divider(),
       ],
     );
   }
