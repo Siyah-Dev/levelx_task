@@ -30,6 +30,10 @@ class HomeController extends StateNotifier<HomeState> {
     }
   }
 
+  void getSelectedIndex(int index) {
+    state = state.copyWith(selectedIndex: index);
+  }
+
   void _handleError(BuildContext context, Object? error) {
     final message = ErrorMapper.getErrorMessage(error ?? '');
     AppUtils.showSnackbar(context, message, Colors.red);
