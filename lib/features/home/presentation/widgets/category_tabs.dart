@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:levelx_task/features/home/presentation/controllers/home_controller.dart';
 
-class CategoryTabs extends StatelessWidget {
+class CategoryTabs extends ConsumerWidget {
   const CategoryTabs({super.key});
 
   final List<String> categoriesList = const [
@@ -12,14 +14,23 @@ class CategoryTabs extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedIndex = ref.watch(homeController).selectedIndex;
     return SizedBox(
       height: 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categoriesList.length,
         itemBuilder: (context, index) {
-          return TabItem(title: categoriesList[index], selected: index == 0);
+          return InkWell(
+            onTap: () {
+              ref.read(homeController.notifier).getSelectedIndex(index);
+            },
+            child: TabItem(
+              title: categoriesList[index],
+              selected: index == selectedIndex,
+            ),
+          );
         },
       ),
     );

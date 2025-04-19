@@ -5,6 +5,7 @@ import 'package:levelx_task/features/home/presentation/controllers/home_controll
 import 'package:levelx_task/features/home/presentation/widgets/category_tabs.dart';
 import 'package:levelx_task/features/home/presentation/widgets/header_widget.dart';
 import 'package:levelx_task/features/home/presentation/widgets/post_card_widget.dart';
+import 'package:levelx_task/features/product_details/presentation/screens/product_details_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -54,12 +55,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                       const CategoryTabs(),
                       Expanded(
-                        child: ListView.builder(
-                          itemCount: postList.length,
-                          itemBuilder:
-                              (context, index) =>
-                                  PostCardWidget(post: postList[index]),
-                        ),
+                        child:
+                            postList.isEmpty
+                                ? Text("No Data")
+                                : ListView.builder(
+                                  itemCount: postList.length,
+                                  itemBuilder:
+                                      (context, index) => InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                      ProductDetailsScreen(
+                                                        post: postList[index],
+                                                      ),
+                                            ),
+                                          );
+                                        },
+                                        child: PostCardWidget(
+                                          post: postList[index],
+                                        ),
+                                      ),
+                                ),
                       ),
                     ],
                   ),
