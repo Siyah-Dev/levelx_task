@@ -1,38 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:levelx_task/features/home/domain/entities/post_entities.dart';
 
 class PostCardWidget extends StatelessWidget {
-  const PostCardWidget({super.key});
+  const PostCardWidget({super.key, required this.post});
+  final PostEntity post;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 10,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
+        Row(
+          spacing: 10,
           children: [
             CircleAvatar(
               radius: 16,
-              backgroundImage: NetworkImage('https://i.pravatar.cc/150?img=3'),
+              backgroundImage: NetworkImage(
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGJzz91QEnKkFVvf_TUr-EgOcykUxfXIkh3g&s',
+              ),
             ),
-            SizedBox(width: 10),
             Expanded(
               child: Text(
-                'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+                post.title,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 10),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
           children: [
-            Icon(Icons.thumb_up_off_alt, size: 18, color: Colors.deepOrange),
-            const SizedBox(width: 4),
-            const Text('2'),
-            const SizedBox(width: 16),
-            Icon(Icons.mode_comment_outlined, size: 18, color: Colors.grey),
-            const SizedBox(width: 16),
-            Icon(Icons.share_outlined, size: 18, color: Colors.grey),
+            Row(
+              children: [
+                Icon(
+                  Icons.thumb_up_off_alt,
+                  size: 18,
+                  color: Colors.deepOrange,
+                ),
+                const SizedBox(width: 4),
+                const Text('2'),
+                const SizedBox(width: 28),
+                Icon(Icons.mode_comment_outlined, size: 18, color: Colors.grey),
+              ],
+            ),
+            Icon(Icons.share, size: 18, color: Colors.grey),
           ],
         ),
         const Divider(height: 30),
